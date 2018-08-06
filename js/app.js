@@ -5,8 +5,12 @@ let days = Vue.component('days', {
     startingDay: Number,
     startingDate: String,
     daysToCreate: Number,
-    eomInvalidDays: Number,
-    country: String
+    eomInvalidDays: Number
+  },
+  computed:  {
+    country: function () {
+      return this.$root.form.country;
+    }
   },
   methods: {
     computeDate: function (dayOfMonth, dayIndex) {
@@ -108,7 +112,10 @@ let app = new Vue({
       this.form.dateNotValid = !moment(this.form.date).isValid();
     }, // checkDateFormat
     checkCountryCode: function () {
-        if ( /^[a-zA-Z]{2}$/gm.exec( this.form.country ) !== null ) {
+        // Make uppercase
+        this.form.country = this.form.country.toString();
+        this.form.country = this.form.country.toUpperCase();
+        if ( /^[A-Z]{2}$/gm.exec( this.form.country ) !== null ) {
             this.form.countryNotValid = false;
         } else {
             this.form.countryNotValid = true;
