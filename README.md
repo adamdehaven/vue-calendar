@@ -6,6 +6,7 @@ Playing around with Vue.js
 * Roughly 5 hours -- not a continuous session.
 
 **Notes**
+* Added field validation, transitions, and some styling.
 * Normally I'd compile files for production, obfuscate (uglify) JavaScript, etc.
 * I normally would have refactored some of the methods for readability / reuse.
 
