@@ -1,6 +1,6 @@
 # Calendar with Vue.js
 
-Playing around with Vue.js (outside of Laravel... weird).
+Playing around with Vue.js
 
 ---
 

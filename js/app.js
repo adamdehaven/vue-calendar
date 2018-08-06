@@ -1,16 +1,18 @@
 // Create days component
 let days = Vue.component('days', {
   props: {
-    startingDay: 0,
-    startingDate: '',
-    daysToCreate: 0,
-    eomInvalidDays: 0
+    currentMonth: String,
+    startingDay: Number,
+    startingDate: String,
+    daysToCreate: Number,
+    eomInvalidDays: Number,
+    country: String
   },
   methods: {
     computeDate: function (dayOfMonth, dayIndex) {
       return parseInt(dayOfMonth) + parseInt(dayIndex);
     }, // computeDate
-    dayIsHoliday: function (month, day) {
+    isHoliday: function (month, day) {
         // Only building in US holidays.
         // Check if country == US, if so, run through holidays
         if ( this.country != 'US' ) {
@@ -23,6 +25,7 @@ let days = Vue.component('days', {
             'July 4', // 4th of July
             'August 22', // My birthday -- might as well be a holiday :)
             'November 11', // Veterans Day
+            'December 24', // Christmas Eve
             'December 25' // Christmas Day
         ];
 
@@ -33,7 +36,7 @@ let days = Vue.component('days', {
   template: `
       <div class="day-container">
           <div v-for="(n, index) in startingDay" class="single-day invalid"></div>
-          <div v-for="(n, index) in daysToCreate" class="single-day" v-text="computeDate(startingDate, index)"></div>
+          <div v-for="(n, index) in daysToCreate" class="single-day" :class="{ holiday: isHoliday(currentMonth, computeDate(startingDate, index)) }" v-text="computeDate(startingDate, index)"></div>
           <div v-for="(n, index) in eomInvalidDays" class="single-day invalid"></div>
       </div>
   `
@@ -43,7 +46,8 @@ let days = Vue.component('days', {
 let calendar = Vue.component('calendars', {
   props: {
     date: String,
-    months: Array
+    months: Array,
+    country: String
   },
   template: `
   <div class="calendar-container cf">
@@ -59,7 +63,7 @@ let calendar = Vue.component('calendars', {
           <div>F</div>
           <div>S</div>
         </div>
-        <days v-bind:startingDay="month.startingDay" v-bind:startingDate="month.startingDate" v-bind:daysToCreate="month.daysToCreate" v-bind:eomInvalidDays="month.eomInvalidDays"></days>
+        <days v-bind:currentMonth="month.name" v-bind:country="country" v-bind:startingDay="month.startingDay" v-bind:startingDate="month.startingDate" v-bind:daysToCreate="month.daysToCreate" v-bind:eomInvalidDays="month.eomInvalidDays"></days>
       </div>
     </div>
   </div>
@@ -93,9 +97,8 @@ let app = new Vue({
       this.createMonth(
         this.form.date,
         moment(this.form.date).format('D'),
-        moment(this.form.date).day(),
+        moment(this.form.date).day()
       );
-
       return this.allMonths;
     } // months
   },

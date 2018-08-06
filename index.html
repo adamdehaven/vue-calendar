@@ -27,7 +27,9 @@
                             v-model="form.date"
                             v-on:input="checkDateFormat"
                             placeholder="mm/dd/yyyy">
-                        <div v-if="form.dateNotValid" class="form-group-error" v-cloak>Please enter a valid date.</div>
+                        <transition name="fade">
+                            <div v-if="form.dateNotValid" class="form-group-error" v-cloak>Please enter a valid date.</div>
+                        </transition>
                     </div>
 
                     <div class="form-group">
@@ -38,7 +40,9 @@
                             min="1"
                             v-model.number="form.days"
                             placeholder="Enter number of days">
+                        <transition name="fade">
                             <div v-if="!form.days || form.days == '0'" class="form-group-error" v-cloak>Please enter number of days to display.</div>
+                        </transition>
                     </div>
 
                     <div class="form-group">
@@ -50,7 +54,9 @@
                             maxlength="2"
                             placeholder="Enter country code"
                             v-on:input="checkCountryCode">
-                        <div v-if="form.countryNotValid" class="form-group-error" v-cloak>Please enter a 2 character country code.</div>
+                        <transition name="fade">
+                            <div v-if="form.countryNotValid" class="form-group-error" v-cloak>Please enter a 2 character country code.</div>
+                        </transition>
                     </div>
 
                 </div> <!-- // .input-container -->
@@ -58,9 +64,9 @@
         </header>
 
         <main>
-
-            <calendars v-if="form.dateNotValid !== true && form.countryNotValid !== true && form.days != ''" v-bind:date="form.date" v-bind:months="months"></calendars>
-
+            <transition name="fade">
+                <calendars v-if="form.dateNotValid !== true && form.countryNotValid !== true && form.days != ''" v-bind:date="form.date" v-bind:months="months" v-bind:country="form.country"></calendars>
+            </transition>
         </main>
 
     </div> <!-- // #app -->
