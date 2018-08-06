@@ -2,7 +2,7 @@
 
 Playing around with Vue.js
 
----
+[View the demo](https://adamdehaven.github.io/vue-calendar/)
 
 ##### Connect
 * [GitHub](https://github.com/adamdehaven)
