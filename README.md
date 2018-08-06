@@ -2,6 +2,14 @@
 
 Playing around with Vue.js
 
+**Total time**
+* Roughly 5 hours -- not a continuous session.
+
+**Notes**
+* Normally I'd compile files for production, obfuscate (uglify) JavaScript, etc.
+* I normally would have refactored some of the methods for readability / reuse.
+
+
 ---
 
 ##### Connect

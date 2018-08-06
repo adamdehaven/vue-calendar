@@ -19,7 +19,7 @@ let days = Vue.component('days', {
             return false;
         }
 
-        // Holidays
+        // Set Valid US Holidays
         let holidayList = [
             'January 1', // New Year's Day
             'July 4', // 4th of July
@@ -29,7 +29,7 @@ let days = Vue.component('days', {
             'December 25' // Christmas Day
         ];
 
-        // If in holidayList, return true, otherwise, false
+        // If day is in holidayList, return true, otherwise, false
         return holidayList.indexOf(month + ' ' + day) > -1;
     } // dayIsHoliday
   },
@@ -76,7 +76,7 @@ let app = new Vue({
     form: {
         date: moment().format('YYYY-MM-DD'),
         dateNotValid: false,
-        days: 22,
+        days: 10,
         country: 'US',
         countryNotValid: false
     },
@@ -93,12 +93,13 @@ let app = new Vue({
       this.allMonths = [];
       this.daysToShowRemaining = this.form.days;
 
-      // Create the first month (automatic after that)
+      // Create the first month (recursive after that)
       this.createMonth(
         this.form.date,
         moment(this.form.date).format('D'),
         moment(this.form.date).day()
       );
+      // Return array of months
       return this.allMonths;
     } // months
   },

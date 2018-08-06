@@ -132,6 +132,7 @@ fieldset {
   label {
     display: block;
     transition: color 0.2s ease-in-out;
+    font-weight: 700;
     @include fontrem(1.4);
 
     .help-text {
