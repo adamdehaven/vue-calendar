@@ -130,6 +130,7 @@ fieldset {
   } // &.has-error
 
   label {
+    color: $white;
     display: block;
     transition: color 0.2s ease-in-out;
     font-weight: 700;
