@@ -1,9 +1,10 @@
 // Create days component
-var days = Vue.component('days', {
+let days = Vue.component('days', {
   props: {
     startingDay: 0,
     startingDate: '',
-    daysToCreate: 0
+    daysToCreate: 0,
+    eomInvalidDays: 0
   },
   methods: {
     computeDate: function (dayOfMonth, dayIndex) {
@@ -33,12 +34,13 @@ var days = Vue.component('days', {
       <div class="day-container">
           <div v-for="(n, index) in startingDay" class="single-day invalid"></div>
           <div v-for="(n, index) in daysToCreate" class="single-day" v-text="computeDate(startingDate, index)"></div>
+          <div v-for="(n, index) in eomInvalidDays" class="single-day invalid"></div>
       </div>
   `
 });
 
 // Create calendar component
-var calendar = Vue.component('calendars', {
+let calendar = Vue.component('calendars', {
   props: {
     date: String,
     months: Array
@@ -57,14 +59,14 @@ var calendar = Vue.component('calendars', {
           <div>F</div>
           <div>S</div>
         </div>
-        <days v-bind:startingDay="month.startingDay, key" v-bind:startingDate="month.startingDate" v-bind:daysToCreate="month.daysToCreate"></days>
+        <days v-bind:startingDay="month.startingDay" v-bind:startingDate="month.startingDate" v-bind:daysToCreate="month.daysToCreate" v-bind:eomInvalidDays="month.eomInvalidDays"></days>
       </div>
     </div>
   </div>
   `
 });
 
-var app = new Vue({
+let app = new Vue({
   el: '#app',
   data: {
     form: {
@@ -122,6 +124,12 @@ var app = new Vue({
       if ( this.daysToShowRemaining <= this.getDaysLeftInMonth(date) ) {
         // Set days to create
         newMonth.daysToCreate = this.daysToShowRemaining;
+        // Determine number of invalid days to add to end of month (abs for non-negative)
+        newMonth.eomInvalidDays = ( 7 - moment(date).add(newMonth.daysToCreate, 'd').day() );
+        if ( newMonth.eomInvalidDays == 7 ) {
+          newMonth.eomInvalidDays = 0;
+        }
+
         // Subtract from global count
         this.daysToShowRemaining = 0;
         // Add to months array
@@ -130,6 +138,11 @@ var app = new Vue({
       } else {
         // Show all the days you can
         newMonth.daysToCreate = this.getDaysLeftInMonth(date);
+        // Determine number of invalid days to add to end of month (abs for non-negative)
+        newMonth.eomInvalidDays = ( 7 - moment(date).add(newMonth.daysToCreate, 'd').day() );
+        if ( newMonth.eomInvalidDays == 7 ) {
+          newMonth.eomInvalidDays = 0;
+        }
         // Subtract from global count
         this.daysToShowRemaining = this.daysToShowRemaining - newMonth.daysToCreate;
         // Add to months array
@@ -149,7 +162,6 @@ var app = new Vue({
     }, // getDaysLeftInMonth
     getNextMonth: function (currentDate) {
       let theNextMonth = moment(currentDate).add(1, 'M').format('YYYY-MM');
-      theNextMonth = moment(theNextMonth).add(1, 'D').format('YYYY-MM-DD');
       return theNextMonth;
     } // getNextMonth
   } // methods
