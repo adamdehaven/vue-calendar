@@ -1,0 +1,200 @@
+::-webkit-input-placeholder { // Chrome/Opera/Safari
+  color: darken($light-gray, 30%);
+}
+::-moz-placeholder { // Firefox 19+
+  color: darken($light-gray, 30%);
+}
+:-ms-input-placeholder { // IE 10+
+  color: darken($light-gray, 30%);
+}
+:-moz-placeholder { // Firefox 18-
+  color: darken($light-gray, 30%);
+}
+:placeholder {
+  color: darken($light-gray, 30%);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+input[type="tel"],
+input[type="search"],
+select,
+textarea {
+  font: inherit;
+  border: 1px solid $cyan;
+  border-radius: 0px;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  height: 40px; // <select> collapses on mac webkit w/o explicit height set. change as desired.
+  background: $white;
+  color: #000;
+  outline: none;
+  transition: border 0.2s ease-in-out;
+
+  &:focus {
+    border-color: darken($cyan, 20%);
+  }
+
+  &.disabled,
+  &:disabled,
+  &.disabled:hover,
+  &:disabled:hover {
+    color: $gray;
+    border-color: $gray;
+    background: $light-gray;
+    cursor: not-allowed;
+    // opacity: 0.7;
+  } // disabled
+
+} // inputs
+
+select {
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0;
+
+  &.disabled,
+  &:disabled,
+  &.disabled:hover,
+  &:disabled:hover {
+    background: darken($white, 5%);
+    cursor: not-allowed;
+    opacity: 0.7;
+  } // disabled
+
+} // select
+
+input[type="search"] {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0;
+}
+
+textarea {
+  height: auto;
+  min-height: 10rem; // change as desired
+  resize: vertical;
+}
+
+fieldset {
+  border: 0; // undo browser defaults
+  margin: 0;
+  padding: 0;
+}
+// form error helpers
+
+// Form Controls
+.form-group {
+  position: relative;
+  width: 100%;
+  margin: 0 auto 2rem;
+  padding-right: 0;
+
+  @media ($tablet-wide) {
+    padding-right: 2rem;
+  }
+
+  &.half-width {
+    @media ($tablet) {
+      float: left;
+      width: 50%;
+    }
+  } // &.half-width
+
+  &.submit-group,
+  &.clear-group {
+    clear: left;
+    margin-bottom: 0;
+  }
+
+  &.has-error {
+
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    input[type="password"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="number"],
+    textarea {
+      border-color: $red;
+    }
+
+    label {
+      color: $red !important;
+    }
+  } // &.has-error
+
+  label {
+    display: block;
+    transition: color 0.2s ease-in-out;
+    @include fontrem(1.4);
+
+    .help-text {
+      float: right;
+    }
+  } // label
+
+  .required {
+    color: $red;
+  }
+
+  .form-group-error {
+    color: $white;
+    background: $red;
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+    @include fontrem(1.4);
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="date"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="number"],
+  textarea {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto 0.5rem;
+
+    &:focus {
+      + label {
+        color: $cyan;
+      }
+    } // &:focus
+
+    &.has-error {
+      border-color: $red !important;
+    }
+
+  } // input
+
+  textarea {
+    margin: 0 auto;
+    padding: 1rem;
+  }
+
+} // .form-group
+
+.input-help-text {
+  color: $gray;
+  text-align: right;
+  @include fontrem(1.4);
+
+  a {
+    color: $gray;
+    border-color: $gray;
+
+    &:hover,
+    &:focus {
+      color: $cyan;
+      border-color: $cyan;
+    }
+  }
+} // .input-help-text

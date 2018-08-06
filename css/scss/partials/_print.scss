@@ -1,0 +1,22 @@
+// Add styles for printers.
+
+@media print {
+
+  * {
+    color: black !important;
+    max-width: 100%;
+  }
+
+  // Print URLs after links
+  a {
+    color:blue;
+    border-color: blue;
+
+    &:after {
+      content: " (" attr(href) ") ";
+      font-size: 0.8em;
+      font-weight: normal;
+    }
+  } // a
+
+} // end print media query

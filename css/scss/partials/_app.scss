@@ -1,0 +1,164 @@
+[v-cloak] {
+  display: none !important;
+}
+
+header {
+  width: 100%;
+  background: $cyan;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+
+  .header-container {
+    width: 100%;
+    margin: 0 auto;
+    max-width: $page-content-max-width;
+    padding: 2rem;
+  }
+
+  h1 {
+    text-align: center;
+    text-transform: uppercase;
+    @include fontrem(3);
+  }
+} // header
+
+.input-container {
+  width: 100%;
+  margin: 2rem auto;
+  max-width: $page-content-max-width;
+
+  .form-group {
+    display: block;
+
+    @media ($tablet-wide) {
+      float: left;
+      width: 33.3333%;
+      padding: 0 1rem;
+    }
+  } // .input
+} // .input-container
+
+#country {
+  text-transform: uppercase;
+}
+
+main {
+  width: 100%;
+  margin: 4rem auto;
+  padding: 0 2rem;
+  max-width: $page-content-max-width;
+}
+
+.calendar-container {
+  width: 100%;
+  max-width: $page-content-max-width;
+  margin: 0 auto;
+}
+
+.calendar {
+  width: 100%;
+  margin: 0 auto 4rem;
+  padding: 0 1rem;
+
+  @media ($phablet) {
+    float: left;
+    width: 50%;
+  }
+
+  .calendar-inner {
+    border: 2px solid $cyan;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  }
+
+  .month-header {
+    color: $white;
+    background: $cyan;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 0.5rem 2rem;
+    @include fontrem(2.4);
+  }
+
+  .days-of-week {
+    border: 2px solid $white;
+
+    > div {
+        color: $gray;
+        background: $light-gray;
+        border-right: 2px solid transparent;
+        text-align: center !important;
+        text-transform: uppercase;
+        padding: 0.5rem 0;
+
+        &:last-of-type {
+          border-right: 0;
+        }
+      }
+  }
+
+  .single-day {
+    border-right: 2px solid $white;
+    border-bottom: 2px solid $white;
+    text-align: center;
+    padding: 1rem 0;
+
+    &:nth-child(7n+7) {
+      border-right: 0;
+    }
+  }
+} // .calendar
+
+// Flex styles
+.days-of-week,
+.day-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  > div {
+    flex: 1;
+    flex-basis: calc(100% / 7);
+    width: 100%;
+    max-width: calc(100% / 7);
+  }
+}
+
+.day-container {
+  border-left: 2px solid $white;
+  border-right: 2px solid $white;
+}
+
+// Default color days
+.single-day {
+  background: rgba($green, 0.3);
+
+  &:nth-child(7n+1),
+  &:nth-child(7n+7) {
+    background: rgba($yellow, 0.5);
+  }
+
+  &.invalid {
+    background: lighten($gray, 20%) !important;
+  }
+
+  &.holiday {
+    background: $red !important;
+  }
+} // .single-day
+
+.form-invalid-error {
+  width: 100%;
+  max-width: 768px;
+  margin: 4rem auto;
+  color: $white;
+  background: $red;
+  border-radius: 0.3rem;
+  padding: 1rem 2rem;
+  border-radius: 0.3rem;
+  text-align: center;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  @include fontrem(2.2);
+
+  @media ($tablet) {
+    @include fontrem(2.4);
+  }
+}

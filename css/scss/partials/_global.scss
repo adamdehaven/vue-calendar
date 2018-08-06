@@ -1,0 +1,238 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+::-moz-selection {
+  background: #b3d4fc; // change as desired
+  text-shadow: none;
+}
+::selection {
+  background: #b3d4fc; // change as desired
+  text-shadow: none;
+}
+
+// global tags
+
+html {
+  font-size: 10px; // set easy multiplier for rem units
+}
+body {
+  position: relative;
+  padding-bottom: 40px; // footer height
+  background: $white;
+  color: $black;
+  line-height: 1.5;
+  font-family: $body-font;
+  @include fontrem(1.6); // set default font-size back to 16px
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700; // since headings likely use a webfont with a specific weight
+  line-height: 1.2;
+}
+ul, ol {
+  padding: 0 0 0 1.5em;
+}
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em auto;
+  padding: 0;
+}
+audio, canvas, iframe, img, svg, video {
+  vertical-align: middle;
+}
+textarea {
+  resize: vertical;
+}
+
+
+// helper classes
+
+.no-scroll {
+  overflow: hidden;
+}
+.no-break {
+  white-space: nowrap;
+}
+.cf,
+.clearfix {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+} // cf, clearfix
+
+.hidden {
+  display: none !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.uppercase {
+  text-transform: uppercase !important;
+}
+
+.bg-cyan {
+  color: $white;
+  background: $cyan;
+}
+
+.bg-red {
+  color: $white;
+  background: $red;
+}
+
+.bg-light-gray {
+  color: $black;
+  background: $light-gray;
+}
+
+.bg-gray {
+  color: $black;
+  background: $gray;
+}
+
+.bg-green {
+  color: $white;
+  background: $green;
+}
+
+img {
+  &.alignleft {
+    margin: 0 auto 2rem;
+
+    @media ($tablet) {
+      float: left;
+      margin: 2rem 2rem 2rem 0 !important;
+    }
+  }
+
+  &.alignright {
+    margin: 0 auto 2rem;
+
+    @media ($tablet) {
+      float: right;
+      margin: 2rem 0 2rem 2rem !important;
+    }
+  }
+
+  &.aligncenter {
+    margin: 0 auto 2rem;
+
+    @media ($tablet) {
+      float: none;
+      display: block;
+      margin: 2rem auto !important;
+    }
+  }
+} // img
+
+// Swap right to left content
+.rtl {
+  @media ($tablet) {
+    float: right !important; // to override .section-col float
+  }
+}
+
+.screen-reader-text {
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: polygon(0px 0px, 0px 0px,0px 0px, 0px 0px);
+  position: absolute !important;
+  white-space: nowrap;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+
+// Forms
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: darken($light-gray, 10%);
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: darken($light-gray, 10%);
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: darken($light-gray, 10%);
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: darken($light-gray, 10%);
+}
+:placeholder {
+  color: darken($light-gray, 10%);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="password"],
+input[type="search"],
+select,
+textarea {
+  border: 1px solid $black;
+  border-radius: 0px;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  min-height: 40px; // prevent collapsing on mac webkit
+  background: $white;
+  color: $black;
+  outline: none;
+  transition: border 0.2s ease-in-out;
+
+  &:focus {
+    border-color: $black;
+  }
+}
+
+input[type="search"] {
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+  appearance: textfield;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  color: $gray;
+  background: darken($light-gray, 10%);
+
+  .footer-container {
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    max-width: $page-content-max-width;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    text-align: center;
+    @include fontrem(1.4);
+
+    a {
+      color: $gray;
+      text-decoration: none;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        color: darken($gray, 30%);
+      }
+    }
+  } // .footer-container
+} // footer

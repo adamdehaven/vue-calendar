@@ -1,0 +1,64 @@
+h1, h2, h3, h4, h5, h6 {
+  color: $black;
+  font-family: $header-font;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.2;
+  margin: 1rem 0 2rem;
+
+  b,
+  strong {
+    font-weight: 700 !important;
+  }
+
+  a {
+    border: 0 !important;
+  }
+
+} // header tags
+
+h1 {
+  margin: 0 auto 2.5rem;
+  @include fontrem(3.2);
+
+  @media (min-width: 400px) {
+    @include fontrem(3.6);
+  }
+
+  @media ($phablet) {
+    @include fontrem(4.2);
+  }
+
+  @media ($tablet) {
+    margin: 0 auto 5rem;
+    @include fontrem(5);
+  }
+
+  @media ($tablet-wide) {
+    @include fontrem(6);
+  }
+} // h1
+
+h2 {
+  @include fontrem(5);
+} // h2
+
+h3 {
+  @include fontrem(3.6);
+
+  @media ($tablet) {
+    @include fontrem(4.4);
+  }
+} // h3
+
+h4 {
+  @include fontrem(3.4);
+}
+
+h5 {
+  @include fontrem(2.4);
+}
+
+h6 {
+  @include fontrem(1.8);
+}

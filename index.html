@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#00adef">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="./css/app.min.css" type="text/css" media="all">
+    <title>Calendar App</title>
+</head>
+<body>
+
+    <div id="app">
+
+        <header>
+            <div class="header-container">
+                <h1>Calendar App</h1>
+
+                <div class="input-container cf">
+
+                    <div class="form-group">
+                        <label for="date">Start date</label>
+                        <input
+                            id="date"
+                            type="date"
+                            v-model="form.date"
+                            v-on:input="checkDateFormat"
+                            placeholder="mm/dd/yyyy">
+                        <div v-if="form.dateNotValid" class="form-group-error" v-cloak>Please enter a valid date.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="days">Number of Days</label>
+                        <input
+                            id="days"
+                            type="number"
+                            min="1"
+                            v-model.number="form.days"
+                            placeholder="Enter number of days">
+                            <div v-if="!form.days || form.days == '0'" class="form-group-error" v-cloak>Please enter number of days to display.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="country">Country Code</label>
+                        <input
+                            id="country"
+                            type="text"
+                            v-model="form.country"
+                            maxlength="2"
+                            placeholder="Enter country code"
+                            v-on:input="checkCountryCode">
+                        <div v-if="form.countryNotValid" class="form-group-error" v-cloak>Please enter a 2 character country code.</div>
+                    </div>
+
+                </div> <!-- // .input-container -->
+            </div>
+        </header>
+
+        <main>
+
+            <calendars v-if="form.dateNotValid !== true && form.countryNotValid !== true && form.days != ''" v-bind:date="form.date" v-bind:months="months"></calendars>
+
+            <div class="form-invalid-error" v-cloak v-else>Please complete all fields above.</div>
+
+        </main>
+
+    </div> <!-- // #app -->
+
+    <footer>
+        <div class="footer-container">
+            <a href="https://github.com/adamdehaven" rel="noopener external" target="_blank">Adam DeHaven</a>
+        </div>
+    </footer>
+
+
+    <!-- production version, optimized for size and speed -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script> -->
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+
+
+    <script src="./js/moment.min.js"></script>
+    <script src="./js/app.js"></script>
+</body>
+</html>

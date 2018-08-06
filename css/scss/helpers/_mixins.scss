@@ -1,0 +1,8 @@
+// Rem-unit Font Size
+// =====================
+// Example usage:
+// @include fontrem(2.4);
+@mixin fontrem($remSize) {
+  font-size: $remSize * 10px; // fallback
+  font-size: #{$remSize}rem;
+}
