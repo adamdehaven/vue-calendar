@@ -49,6 +49,7 @@
                             type="number"
                             min="1"
                             v-model.number="form.days"
+                            v-on:input="trackEvent('change', 'form_days', 'user_changed_form_days_' + form.days)"
                             placeholder="Enter number of days">
                         <transition name="fade">
                             <div v-if="!form.days || form.days == '0'" class="form-group-error" v-cloak>Please enter number of days to display.</div>
@@ -83,7 +84,7 @@
 
     <footer>
         <div class="footer-container">
-            <a href="https://github.com/adamdehaven" rel="noopener external" target="_blank">Adam DeHaven</a>
+            <a href="https://github.com/adamdehaven" rel="noopener external" target="_blank" v-on:click="trackEvent('click', 'footer_link', 'user_clicked_footer_link')">Adam DeHaven</a>
         </div>
     </footer>
 

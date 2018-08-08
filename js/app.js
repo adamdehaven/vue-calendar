@@ -110,6 +110,10 @@ let app = new Vue({
   methods: {
     checkDateFormat: function () {
       this.form.dateNotValid = !moment(this.form.date).isValid();
+      // If valid date, track event
+      if ( this.form.dateNotValid === true ) {
+        this.trackEvent('change', 'form_date', 'user_changed_date_' + moment(this.form.date).format(YYYY_MM_DD));
+      }
     }, // checkDateFormat
     checkCountryCode: function () {
         // Make uppercase
@@ -117,6 +121,7 @@ let app = new Vue({
         this.form.country = this.form.country.toUpperCase();
         if ( /^[A-Z]{2}$/gm.exec( this.form.country ) !== null ) {
             this.form.countryNotValid = false;
+            this.trackEvent('change', 'form_country', 'user_changed_country_' + this.form.country);
         } else {
             this.form.countryNotValid = true;
         }
@@ -174,6 +179,28 @@ let app = new Vue({
     getNextMonth: function (currentDate) {
       let theNextMonth = moment(currentDate).add(1, 'M').format('YYYY-MM');
       return theNextMonth;
-    } // getNextMonth
+    }, // getNextMonth
+    trackEvent: function (action, category, label, value, callback) {
+
+      if( typeof gtag == 'function' ) {
+
+        var event_action    = action || null,
+            event_category  = category || null,
+            event_label     = label || null,
+            event_value     = value || null,
+            event_callback  = callback || function(){};
+
+        if (event_action === null) { return; } // action is required
+
+        // Send GA Event
+        gtag('event', event_action, {
+          'event_category': event_category,
+          'event_action':   event_action,
+          'event_label':    event_label,
+          'value':          event_value,
+          'event_callback': event_callback
+        });
+      } // end if gtag
+    } // trackEvent
   } // methods
 });
